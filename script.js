@@ -42,6 +42,10 @@ const materias = {
 
 let aprobadas = new Set();
 
+function puedeAprobar(materia) {
+  return !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+}
+
 function renderMalla() {
   for (const anio in materias) {
     const contenedor = document.getElementById(`anio-${anio}`);
@@ -52,11 +56,9 @@ function renderMalla() {
       div.className = "materia";
       div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
-      const puedeCursar = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
-
       if (aprobadas.has(materia.codigo)) {
         div.classList.add("aprobada");
-      } else if (puedeCursar) {
+      } else if (puedeAprobar(materia)) {
         div.classList.add("habilitada");
       } else {
         div.classList.add("bloqueada");
@@ -65,13 +67,10 @@ function renderMalla() {
       div.onclick = () => {
         if (aprobadas.has(materia.codigo)) {
           aprobadas.delete(materia.codigo);
+        } else if (puedeAprobar(materia)) {
+          aprobadas.add(materia.codigo);
         } else {
-          const puedeCursarAhora = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
-          if (puedeCursarAhora) {
-            aprobadas.add(materia.codigo);
-          } else {
-            alert(`No podés aprobar "${materia.nombre}" sin tener aprobadas las correlativas.`);
-          }
+          alert(`No podés aprobar "${materia.nombre}" sin tener aprobadas sus correlativas.`);
         }
         renderMalla();
       };
