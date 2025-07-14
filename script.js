@@ -1,10 +1,10 @@
 const materias = {
   "1": [
-  { codigo: "101", nombre: "Algoritmos y Estructuras de Datos I", requisitos: [] },
-  { codigo: "102", nombre: "Álgebra", requisitos: [] },
-  { codigo: "103", nombre: "Algoritmos y Estructuras de Datos II", requisitos: ["101"] },
-  { codigo: "104", nombre: "Lógica y Matemática Computacional", requisitos: ["102"] },
-  { codigo: "105", nombre: "Sistemas y Organizaciones", requisitos: [] },
+    { codigo: "101", nombre: "Algoritmos y Estructuras de Datos I", requisitos: [] },
+    { codigo: "102", nombre: "Álgebra", requisitos: [] },
+    { codigo: "103", nombre: "Algoritmos y Estructuras de Datos II", requisitos: ["101"] },
+    { codigo: "104", nombre: "Lógica y Matemática Computacional", requisitos: ["102"] },
+    { codigo: "105", nombre: "Sistemas y Organizaciones", requisitos: [] },
   ],
   "2": [
     { codigo: "201", nombre: "Paradigmas y Lenguajes", requisitos: ["103"] },
@@ -65,8 +65,13 @@ function renderMalla() {
       div.onclick = () => {
         if (aprobadas.has(materia.codigo)) {
           aprobadas.delete(materia.codigo);
-        } else if (puedeCursar) {
-          aprobadas.add(materia.codigo);
+        } else {
+          const puedeCursarAhora = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+          if (puedeCursarAhora) {
+            aprobadas.add(materia.codigo);
+          } else {
+            alert(`No podés aprobar "${materia.nombre}" sin tener aprobadas las correlativas.`);
+          }
         }
         renderMalla();
       };
