@@ -52,9 +52,11 @@ function renderMalla() {
       div.className = "materia";
       div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
+      const puedeCursar = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+
       if (aprobadas.has(materia.codigo)) {
         div.classList.add("aprobada");
-      } else if (!materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r))) {
+      } else if (puedeCursar) {
         div.classList.add("habilitada");
       } else {
         div.classList.add("bloqueada");
@@ -63,7 +65,7 @@ function renderMalla() {
       div.onclick = () => {
         if (aprobadas.has(materia.codigo)) {
           aprobadas.delete(materia.codigo);
-        } else if (div.classList.contains("habilitada")) {
+        } else if (puedeCursar) {
           aprobadas.add(materia.codigo);
         }
         renderMalla();
@@ -74,4 +76,4 @@ function renderMalla() {
   }
 }
 
-window.onload = renderMalla;
+document.addEventListener("DOMContentLoaded", renderMalla);
