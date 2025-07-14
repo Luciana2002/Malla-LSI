@@ -1,73 +1,65 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #ffe4f2;
+  background-color: #ffe4f0;
   color: #333;
-  padding: 2rem;
   margin: 0;
+  padding: 1rem;
   text-align: center;
 }
 
 h1 {
-  color: #d81b60;
+  color: #c2185b;
   margin-bottom: 2rem;
 }
 
-#contenedor-vertical {
+.malla {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  gap: 20px;
   flex-wrap: nowrap;
   overflow-x: auto;
-  padding: 1rem;
-  gap: 2rem;
 }
 
 .anio {
-  background: #fff0f5;
-  padding: 1rem;
-  border-radius: 10px;
-  min-width: 220px;
-  box-shadow: 0 0 10px #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffecf2;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #e0b0c7;
 }
 
 .anio h2 {
   color: #c2185b;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .materia {
-  background: #f8bbd0;
-  padding: 0.7rem;
-  border-radius: 8px;
+  background-color: #fdfdfd;
+  border: 2px solid #ffc1e3;
+  border-radius: 10px;
+  padding: 10px;
   margin: 6px 0;
-  font-size: 0.9rem;
+  width: 180px;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 3px #ccc;
 }
 
-.materia:hover {
-  transform: scale(1.02);
+.materia.aprobada {
+  background-color: #f06292;
+  color: white;
+  font-weight: bold;
 }
 
-.bloqueada {
-  background: #eee;
-  color: #999;
+.materia.habilitada:hover {
+  background-color: #f8bbd0;
+}
+
+.materia.bloqueada {
+  background-color: #f3f3f3;
+  color: #bbb;
   cursor: not-allowed;
-  border-color: #ccc;
-}
-
-.habilitada {
-  background: #f06292;
-  color: white;
-  border-color: #ec407a;
-}
-
-.aprobada {
-  background: #ab47bc;
-  color: white;
-  border-color: #8e24aa;
-  text-decoration: line-through;
+  border-style: dashed;
 }
