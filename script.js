@@ -68,11 +68,11 @@ function renderMalla() {
 
       div.onclick = () => {
         if (aprobadas.has(materia.codigo)) {
-          aprobadas.delete(materia.codigo); // desmarcar
+          aprobadas.delete(materia.codigo);
         } else if (div.classList.contains("habilitada")) {
-          aprobadas.add(materia.codigo); // marcar
+          aprobadas.add(materia.codigo);
         }
-        renderMalla(); // volver a dibujar
+        renderMalla();
       };
 
       bloque.appendChild(div);
