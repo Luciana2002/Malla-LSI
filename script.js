@@ -49,18 +49,20 @@ function renderMalla() {
   for (const anio in materias) {
     const contenedor = document.createElement("div");
     contenedor.className = "anio";
-    contenedor.innerHTML = <h2>${anio}° Año</h2>
+    contenedor.innerHTML = `
+      <h2>${anio}° Año</h2>
       <h3>1° Cuatrimestre</h3>
       <div class="cuatri" id="cuatri-1-${anio}"></div>
       <h3>2° Cuatrimestre</h3>
-      <div class="cuatri" id="cuatri-2-${anio}"></div>;
+      <div class="cuatri" id="cuatri-2-${anio}"></div>
+    `;
 
     malla.appendChild(contenedor);
 
     materias[anio].forEach(materia => {
       const div = document.createElement("div");
       div.className = "materia";
-      div.innerText = ${materia.codigo} - ${materia.nombre};
+      div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
       const puedeRendir = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
 
@@ -81,8 +83,8 @@ function renderMalla() {
         renderMalla();
       };
 
-      const destino = document.getElementById(cuatri-${materia.cuatrimestre}-${anio});
-      destino.appendChild(div);
+      const destino = document.getElementById(`cuatri-${materia.cuatrimestre}-${anio}`);
+      if (destino) destino.appendChild(div);
     });
   }
 }
