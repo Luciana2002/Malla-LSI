@@ -42,6 +42,15 @@ const materias = {
 
 let aprobadas = new Set();
 
+// Cargar del localStorage si existe
+const guardadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
+aprobadas = new Set(guardadas);
+
+// Función auxiliar para verificar si se puede cursar
+function puedeCursar(materia) {
+  return !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+}
+
 function renderMalla() {
   const malla = document.getElementById("malla");
   malla.innerHTML = "";
@@ -64,7 +73,7 @@ function renderMalla() {
       div.className = "materia";
       div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
-      const puedeRendir = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+      const puedeRendir = puedeCursar(materia);
 
       if (aprobadas.has(materia.codigo)) {
         div.classList.add("aprobada");
@@ -80,6 +89,8 @@ function renderMalla() {
         } else if (puedeRendir) {
           aprobadas.add(materia.codigo);
         }
+        // Guardar en localStorage
+        localStorage.setItem("aprobadas", JSON.stringify([...aprobadas]));
         renderMalla();
       };
 
