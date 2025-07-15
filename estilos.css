@@ -63,3 +63,13 @@ h1 {
   cursor: not-allowed;
   border-style: dashed;
 }
+
+.cuatri {
+  margin-bottom: 10px;
+}
+
+.cuatri h3 {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #c2185b;
+}
