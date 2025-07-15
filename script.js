@@ -84,7 +84,7 @@ function renderMalla() {
       };
 
       const destino = document.getElementById(`cuatri-${materia.cuatrimestre}-${anio}`);
-      if (destino) destino.appendChild(div);
+      destino.appendChild(div);
     });
   }
 }
