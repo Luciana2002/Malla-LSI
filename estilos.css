@@ -9,6 +9,26 @@ h1 {
   margin-top: 20px;
 }
 
+button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ff66aa;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #e05595;
+}
+
+#porcentajeAvance {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
 .malla {
   display: flex;
   justify-content: center;
