@@ -59,35 +59,33 @@ function renderMalla() {
 
     malla.appendChild(contenedor);
 
-    materias[anio]
-      .sort((a, b) => a.cuatrimestre - b.cuatrimestre)
-      .forEach(materia => {
-        const div = document.createElement("div");
-        div.className = "materia";
-        div.innerText = `${materia.codigo} - ${materia.nombre}`;
+    materias[anio].forEach(materia => {
+      const div = document.createElement("div");
+      div.className = "materia";
+      div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
-        const puedeRendir = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+      const puedeRendir = !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
 
+      if (aprobadas.has(materia.codigo)) {
+        div.classList.add("aprobada");
+      } else if (puedeRendir) {
+        div.classList.add("habilitada");
+      } else {
+        div.classList.add("bloqueada");
+      }
+
+      div.onclick = () => {
         if (aprobadas.has(materia.codigo)) {
-          div.classList.add("aprobada");
+          aprobadas.delete(materia.codigo);
         } else if (puedeRendir) {
-          div.classList.add("habilitada");
-        } else {
-          div.classList.add("bloqueada");
+          aprobadas.add(materia.codigo);
         }
+        renderMalla();
+      };
 
-        div.onclick = () => {
-          if (aprobadas.has(materia.codigo)) {
-            aprobadas.delete(materia.codigo);
-          } else if (puedeRendir) {
-            aprobadas.add(materia.codigo);
-          }
-          renderMalla();
-        };
-
-        const destino = document.getElementById(`cuatri-${materia.cuatrimestre}-${anio}`);
-        destino.appendChild(div);
-      });
+      const destino = document.getElementById(`cuatri-${materia.cuatrimestre}-${anio}`);
+      destino.appendChild(div);
+    });
   }
 }
 
