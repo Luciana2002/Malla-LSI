@@ -42,7 +42,7 @@ const materias = {
 
 let aprobadas = new Set();
 
-function puedeAprobar(codigo) {
+function puedeRendir(codigo) {
   const materia = Object.values(materias).flat().find(m => m.codigo === codigo);
   return materia.requisitos.every(r => aprobadas.has(r));
 }
@@ -57,23 +57,27 @@ function renderMalla() {
       div.className = "materia";
       div.innerText = `${materia.codigo} - ${materia.nombre}`;
 
-      const habilitada = puedeAprobar(materia.codigo);
+      const puedeMarcar = puedeRendir(materia.codigo);
 
       if (aprobadas.has(materia.codigo)) {
         div.classList.add("aprobada");
-      } else if (habilitada) {
+      } else if (puedeMarcar) {
         div.classList.add("habilitada");
       } else {
         div.classList.add("bloqueada");
       }
 
       div.onclick = () => {
+        // Verificamos si ya estaba aprobada
         if (aprobadas.has(materia.codigo)) {
           aprobadas.delete(materia.codigo);
-        } else if (puedeAprobar(materia.codigo)) {
-          aprobadas.add(materia.codigo);
         } else {
-          alert(`No podés aprobar "${materia.nombre}" sin tener todas las correlativas aprobadas.`);
+          // Solo se puede marcar si cumple los requisitos
+          if (puedeRendir(materia.codigo)) {
+            aprobadas.add(materia.codigo);
+          } else {
+            alert(`No podés rendir "${materia.nombre}" sin tener todas las correlativas aprobadas.`);
+          }
         }
         renderMalla();
       };
