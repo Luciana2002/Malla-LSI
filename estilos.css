@@ -1,75 +1,66 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #ffe4f0;
-  color: #333;
-  margin: 0;
-  padding: 1rem;
+  font-family: Arial, sans-serif;
+  background-color: #ffe6f0;
+  color: #b30059;
   text-align: center;
 }
 
 h1 {
-  color: #c2185b;
-  margin-bottom: 2rem;
+  margin-top: 20px;
 }
 
 .malla {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
 .anio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #ffecf2;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 0 8px #e0b0c7;
+  background-color: #fff0f5;
+  padding: 15px;
+  border-radius: 10px;
+  width: 220px;
 }
 
 .anio h2 {
-  color: #c2185b;
   margin-bottom: 10px;
-}
-
-.materia {
-  background-color: #fdfdfd;
-  border: 2px solid #ffc1e3;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 6px 0;
-  width: 180px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 1px 1px 3px #ccc;
-}
-
-.materia.aprobada {
-  background-color: #f06292;
-  color: white;
-  font-weight: bold;
-}
-
-.materia.habilitada:hover {
-  background-color: #f8bbd0;
-}
-
-.materia.bloqueada {
-  background-color: #f3f3f3;
-  color: #bbb;
-  cursor: not-allowed;
-  border-style: dashed;
 }
 
 .cuatri {
   margin-bottom: 10px;
 }
 
-.cuatri h3 {
-  margin: 4px 0;
+.materia {
+  border: 2px dashed #e09ec2;
+  border-radius: 10px;
+  margin: 6px auto;
+  padding: 8px;
+  background-color: #fdfdfd;
+  cursor: pointer;
   font-size: 14px;
-  color: #c2185b;
+}
+
+.materia.aprobada {
+  background-color: #ff6699;
+  color: white;
+  border: none;
+}
+
+.materia.habilitada {
+  background-color: #ffffff;
+  border: 2px solid #ff66aa;
+}
+
+.materia.bloqueada {
+  background-color: #f3f3f3;
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.cuatri h3 {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #c7005c;
 }
