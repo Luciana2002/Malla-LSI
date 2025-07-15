@@ -41,14 +41,21 @@ const materias = {
 };
 
 let aprobadas = new Set();
-
-// Cargar del localStorage si existe
 const guardadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
 aprobadas = new Set(guardadas);
 
-// Función auxiliar para verificar si se puede cursar
 function puedeCursar(materia) {
   return !materia.requisitos.length || materia.requisitos.every(r => aprobadas.has(r));
+}
+
+function calcularPorcentaje() {
+  let totalMaterias = 0;
+  for (const anio in materias) {
+    totalMaterias += materias[anio].length;
+  }
+  const aprobadasCount = aprobadas.size;
+  const porcentaje = Math.round((aprobadasCount / totalMaterias) * 100);
+  document.getElementById("porcentajeAvance").innerText = `Avance: ${porcentaje}%`;
 }
 
 function renderMalla() {
@@ -89,7 +96,6 @@ function renderMalla() {
         } else if (puedeRendir) {
           aprobadas.add(materia.codigo);
         }
-        // Guardar en localStorage
         localStorage.setItem("aprobadas", JSON.stringify([...aprobadas]));
         renderMalla();
       };
@@ -98,6 +104,17 @@ function renderMalla() {
       destino.appendChild(div);
     });
   }
+
+  calcularPorcentaje();
 }
+
+// Evento reiniciar
+document.getElementById("reiniciarBtn").addEventListener("click", () => {
+  if (confirm("¿Estás seguro que querés reiniciar la malla? Se perderán las materias aprobadas.")) {
+    aprobadas.clear();
+    localStorage.removeItem("aprobadas");
+    renderMalla();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", renderMalla);
